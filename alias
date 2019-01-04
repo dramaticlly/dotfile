@@ -1,0 +1,45 @@
+alias e=emacs
+alias vi=vim
+
+# Apollo 
+alias bo='/apollo/env/OctaneBrazilTools/bin/brazil-octane'
+
+# Workspace
+alias bwsuse='bws use --gitMode -p'
+alias bws='brazil ws'
+alias bvs='brazil vs'
+
+# Brazil build system
+alias bb=brazil-build
+alias bba='brazil-build apollo-pkg'
+alias bre='brazil-runtime-exec'
+alias bp='brazil-path'
+alias bwscreate='bws create -n'
+alias brc=brazil-recursive-cmd
+alias bbr='brc brazil-build'
+alias bball='brc --allPackages'
+alias bbb='brc --allPackages brazil-build'
+alias bbra='bbr apollo-pkg'
+
+alias bbs='bb server'
+alias bbcr='bb clean && bb release'
+alias tail-bbs='/apollo/env/envImprovement/bin/rotail `brazil-path package-build-root`/private/var/output/logs/application.log'
+
+# Disk
+alias duall='du -sh * | sort -rh'
+
+# Git, it should be in gitconfig
+alias gitloggraph="git log --graph --pretty=oneline --abbrev-commit --decorate"
+alias gl="git log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+
+# Misc
+alias kf="kinit -f && mwinit -o"
+alias dateu="date -u"
+alias ec2-ssh=/apollo/env/EC2SSHWrapper/bin/ec2-ssh
+alias multitail='/apollo/env/envImprovement/bin/multitail -F ~/.multitailrc -CS php'
+alias sam='brazil-build-tool-exec sam'
+
+
+# Aws
+alias aws-local='aws --no-verify-ssl --endpoint-url http://127.0.0.1:8000 --region us-east-1'
+alias ecs="aws --no-verify-ssl --endpoint-url http://127.0.0.1:8000 --region us-east-1 ecs"
