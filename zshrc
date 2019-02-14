@@ -72,17 +72,8 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# # aliases
+[[ -f ~/.alias ]] && source ~/.alias
 
 
 # Plugins
@@ -100,6 +91,3 @@ alias ecs="aws --no-verify-ssl --endpoint-url http://127.0.0.1:8000 --region us-
 export PATH=$HOME/.toolbox/bin:$PATH
 export JAVA_HOME=/apollo/env/JavaSE8/jdk1.8
 export PATH=$JAVA_HOME/bin:$PATH
-
-# aliases
-[[ -f ~/.aliases ]] && source ~/.aliases
