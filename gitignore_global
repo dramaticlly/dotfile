@@ -18,10 +18,28 @@ hs_err_pid*
 *.iws
 out/
 .idea_modules/
+.layout.properties
 
 ##########################
 ## OS X
 ##########################
 .DS_Store
 
+##########################
+## per project
+##########################
 build/
+/build
+
+##########################
+## per project
+##########################
+/.apollorc
+/apollo-overrides
+/build
+
+##########################
+## Misc
+##########################
+*.pem
+.gitignore

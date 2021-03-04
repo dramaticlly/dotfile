@@ -1,0 +1,66 @@
+for f in AmazonAwsCli envImprovement MadisonQLRedisNode SDETools OdinTools MadisonContainerManagerBackendServiceMySQL; do
+    if [[ -d /apollo/env/$f ]]; then
+        export PATH=$PATH:/apollo/env/$f/bin
+    fi
+done
+
+set-title() {
+    echo -e "\e]0;$*\007"
+}
+
+ssh() {
+    set-title $*;
+    /usr/bin/ssh -2 $*;
+    set-title $HOST;
+}
+
+madison-port() {
+    for port in 8000 8180 8280 10443;do
+        echo $port && lsof -i tcp:$port;
+    done
+}
+
+fargate-port() {
+    for port in 7000 7443 8000 8443 9000 9443;do
+        echo $port && (sudo netstat -ntlup | grep $port);
+    done
+}
+
+# files contains aws regions conversion
+region_file=~/.aws_regions.tsv 
+regions () {
+if [ $# -eq 0 ] ; then
+    cat $region_file
+    return
+fi
+grep -i $1 $region_file
+}
+
+autoload -U compinit && compinit -u
+# z : https://github.com/rupa/z
+[ -f ~/bin/z.sh ] && source ~/bin/z.sh
+
+# fzf : https://github.com/junegunn/fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export JAVA_HOME=/local/apollo/package/local_1/AL2012/JDK8/JDK8-45000.0-0/jdk1.8
+export PATH=$JAVA_HOME/bin:$PATH
+export DOCKER_HOST=unix:///var/run/docker.sock
+
+# import all alias
+[[ -f ~/.alias ]] && source ~/.alias && echo 'loaded alias files'
+
+if [[ `hostname -d` =~ "amazon" ]]; then
+    [[ -f ~/.alias.a2z ]] && source ~/.alias.a2z && echo 'loaded a2z alias'
+fi
+
+# python
+export PATH=$PATH:~/.local/bin
+
+# sam 
+[ -f ~/.samdev.env ] && source ~/.samdev.env
+# isengard creds
+# zsh completion:
+[[ -f ~/.cache/BenderLibIsengard/isengard_zsh_completion.sh ]] && source ~/.cache/BenderLibIsengard/isengard_zsh_completion.sh
+# zsh syntax highlighting rules:
+[[ -f ~/.cache/BenderLibIsengard/isengard_zsh_highlighter.sh ]] && source ~/.cache/BenderLibIsengard/isengard_zsh_highlighter.sh

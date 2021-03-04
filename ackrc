@@ -1,0 +1,16 @@
+# Always color, even if piping to a another program
+--color
+
+# ignore useless directory
+--ignore-dir=.idea/
+--ignore-dir=node_modules/
+--ignore-dir=build/
+
+--type-set=json=.json
+--type-set=markdown=.md
+
+# yaml is pretty versitile
+--type-set=yaml=.yml
+--type-add=yaml=.yaml
+--type-add=yaml=.template
+#--type-set=json:ext:json
