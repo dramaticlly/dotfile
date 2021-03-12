@@ -1,6 +1,4 @@
-source /apollo/env/envImprovement/var/vimrc
-runtime macros/matchit.vim
-
+syntax on
 " Vundle Start
 set nocompatible              " be iMproved, required
 filetype off                  " required
