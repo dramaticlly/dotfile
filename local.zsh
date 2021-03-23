@@ -6,14 +6,10 @@ alias ibrew="arch -x86_64 /opt/brew/bin/brew"
 [[ -d /opt/brew/share/zsh/site-functions/ ]] && fpath+=(/opt/brew/share/zsh/site-functions/)
 
 # manage java environment
-export PATH="$HOME/.jenv/bin:$PATH"
+export PATH=$HOME/.jenv/bin:$PATH
 eval "$(jenv init -)"
-
-unset JAVA_HOME
-JAVA_HOME="$(/usr/libexec/java_home -v 11.0)"
-export JAVA_HOME
-PATH=$JAVA_HOME/bin:$PATH
-export PATH
+# prefer GNU sed
+export PATH=/opt/brew/opt/gnu-sed/libexec/gnubin:$PATH
 
 # Improvoed cat and fd
 ### Alias cat to [bat](https://github.com/sharkdp/bat)
@@ -26,6 +22,9 @@ hash bat 2>/dev/null && alias cat='bat'
 
 # z/jump around https://github.com/rupa/z
 [ -f ~/.zsh/z.sh ] && . $HOME/.zsh/z.sh
+
+# kubenetes autocompletion
+source <(kubectl completion zsh)
 
 # import all alias
 [ -f ~/.alias ] && source ~/.alias && echo 'loaded alias files'
