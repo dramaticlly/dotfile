@@ -25,6 +25,7 @@ alias aws-local='aws --no-verify-ssl --endpoint-url http://127.0.0.1:8000 --regi
 
 # default to python3
 alias python='python3'
+alias pip='pip3'
 
 #misc
 alias grep='nocorrect grep --color=auto --exclude-dir build'

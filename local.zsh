@@ -10,6 +10,10 @@ export PATH=$HOME/.jenv/bin:$PATH
 eval "$(jenv init -)"
 # prefer GNU sed
 export PATH=/opt/brew/opt/gnu-sed/libexec/gnubin:$PATH
+# export pip installed bin
+export PATH=$PATH:$HOME/Library/Python/3.8/bin
+
+export EDITOR=vim
 
 # Improvoed cat and fd
 ### Alias cat to [bat](https://github.com/sharkdp/bat)
@@ -25,6 +29,29 @@ hash bat 2>/dev/null && alias cat='bat'
 
 # kubenetes autocompletion
 source <(kubectl completion zsh)
+
+list_ec2() {
+    aws ec2 describe-instances \
+        --no-cli-pager \
+        --output table \
+        --filters Name=tag-key,Values=Name \
+        --query 'Reservations[*].Instances[*].{Instance:InstanceId,AZ:Placement.AvailabilityZone,Type:InstanceType,Name:Tags[?Key==`Name`]|[0].Value,State:State.Name,AMI:ImageId}'
+}
+
+eks17_ami_history() {
+    aws ssm get-parameter-history --name /AIS/AMI/"AmazonEKS17Linux"/Id \
+        | jq --arg IMAGE $1 '.Parameters[]| select (.Value==$IMAGE) | {date: .LastModifiedDate, ami: .Value}'
+}
+
+eks18_ami_history() {
+    aws ssm get-parameter-history --name /AIS/AMI/"AmazonEKS18Linux"/Id \
+        | jq --arg IMAGE $1 '.Parameters[]| select (.Value==$IMAGE) | {date: .LastModifiedDate, ami: .Value}'
+}
+
+eks19_ami_history() {
+    aws ssm get-parameter-history --name /AIS/AMI/"AmazonEKS19Linux"/Id \
+        | jq --arg IMAGE $1 '.Parameters[]| select (.Value==$IMAGE) | {date: .LastModifiedDate, ami: .Value}'
+}
 
 # import all alias
 [ -f ~/.alias ] && source ~/.alias && echo 'loaded alias files'
