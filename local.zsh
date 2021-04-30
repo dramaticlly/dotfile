@@ -12,6 +12,7 @@ eval "$(jenv init -)"
 export PATH=/opt/brew/opt/gnu-sed/libexec/gnubin:$PATH
 # export pip installed bin
 export PATH=$PATH:$HOME/Library/Python/3.8/bin
+export PATH=$PATH:$HOME/.poetry/bin
 
 export EDITOR=vim
 
@@ -39,17 +40,17 @@ list_ec2() {
 }
 
 eks17_ami_history() {
-    aws ssm get-parameter-history --name /AIS/AMI/"AmazonEKS17Linux"/Id \
+    aws ssm get-parameter-history --name /AIS/AMI/AmazonEKS17Linux/Id \
         | jq --arg IMAGE $1 '.Parameters[]| select (.Value==$IMAGE) | {date: .LastModifiedDate, ami: .Value}'
 }
 
 eks18_ami_history() {
-    aws ssm get-parameter-history --name /AIS/AMI/"AmazonEKS18Linux"/Id \
+    aws ssm get-parameter-history --name /AIS/AMI/AmazonEKS18Linux/Id \
         | jq --arg IMAGE $1 '.Parameters[]| select (.Value==$IMAGE) | {date: .LastModifiedDate, ami: .Value}'
 }
 
 eks19_ami_history() {
-    aws ssm get-parameter-history --name /AIS/AMI/"AmazonEKS19Linux"/Id \
+    aws ssm get-parameter-history --name /AIS/AMI/AmazonEKS19Linux/Id \
         | jq --arg IMAGE $1 '.Parameters[]| select (.Value==$IMAGE) | {date: .LastModifiedDate, ami: .Value}'
 }
 
