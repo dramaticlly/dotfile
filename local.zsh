@@ -15,6 +15,7 @@ export PATH=$PATH:$HOME/Library/Python/3.8/bin
 export PATH=$PATH:$HOME/.poetry/bin
 
 export EDITOR=vim
+export AWS_PAGER=
 
 # Improvoed cat and fd
 ### Alias cat to [bat](https://github.com/sharkdp/bat)
