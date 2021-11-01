@@ -55,6 +55,12 @@ eks19_ami_history() {
         | jq --arg IMAGE $1 '.Parameters[]| select (.Value==$IMAGE) | {date: .LastModifiedDate, ami: .Value}'
 }
 
+# Example `iam_role tableutils-rio-role`
+iam_role() {
+    aws iam list-roles \
+        | jq --arg ROLE $1 '.Roles[] | select(.RoleName == $ROLE)'
+}
+
 # import all alias
 [ -f ~/.alias ] && source ~/.alias && echo 'loaded alias files'
 
