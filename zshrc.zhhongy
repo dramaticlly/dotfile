@@ -57,7 +57,7 @@ fi
 # python
 export PATH=$PATH:~/.local/bin
 
-# sam 
+# sam
 [ -f ~/.samdev.env ] && source ~/.samdev.env
 # isengard creds
 # zsh completion:

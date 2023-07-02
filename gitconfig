@@ -1,5 +1,5 @@
 [user]
-    email = hongyue_zhang@apple.com
+    email = steveiszhy@gmail.com
     name = Steve Zhang
 [color]
     ui = auto
@@ -19,7 +19,7 @@
     diffc = diff --cached
     last = log -1 HEAD
     trail2 = log -2 HEAD
-    logme = log --author=zhhongy --since=\"2 weeks ago\"
+    logme = log --author=\"Steve Zhang\" --since=\"2 weeks ago\"
     addu = add -u
     dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%ar%C(reset)%C(auto)%d%C(reset)%n%s' --date-order --all
     l = log --graph --abbrev-commit --decorate --date=relative --format=format:'''%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'''

@@ -1,2 +1,2 @@
 EXCLUDES="README.md LICENSE scripts"
-DOTFILES_DIRS="$HOME/.dotfiles $HOME/workspace/dotfile"
+DOTFILES_DIRS="$HOME/.dotfiles $HOME/workspace/plugins/dotfile"

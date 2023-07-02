@@ -1,76 +1,90 @@
 #debug-only
 #set -x
 
-# brew
-alias ibrew="arch -x86_64 /opt/brew/bin/brew"
-[[ -d /opt/brew/share/zsh/site-functions/ ]] && fpath+=(/opt/brew/share/zsh/site-functions/)
-
-# manage java environment
-export PATH=$HOME/.jenv/bin:$PATH
-eval "$(jenv init -)"
-# prefer GNU sed
-export PATH=/opt/brew/opt/gnu-sed/libexec/gnubin:$PATH
-# export pip installed bin
-export PATH=$PATH:$HOME/Library/Python/3.8/bin
-export PATH=$PATH:$HOME/.poetry/bin
-
 export EDITOR=vim
 export AWS_PAGER=
 
-# Improvoed cat and fd
-### Alias cat to [bat](https://github.com/sharkdp/bat)
-hash bat 2>/dev/null && alias cat='bat'
-### Alias find to [fd](https://github.com/sharkdp/fd)
-#hash fd 2>/dev/null && alias find='fd'
+# >>> brew >>>
+[[ -d /opt/brew/share/zsh/site-functions/ ]] && fpath+=(/opt/brew/share/zsh/site-functions/)
+# <<< brew <<<
 
-# fuzzy find
+# >>> nodejs/npm/nvm >>>
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# <<< nodejs/npm/nvm <<<
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('$HOME/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "$HOME/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="$HOME/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# >>> jenv >>>
+export PATH=$HOME/.jenv/shims:$PATH
+export JENV_SHELL=zsh
+export JENV_LOADED=1
+unset JAVA_HOME
+unset JDK_HOME
+source '/opt/homebrew/Cellar/jenv/0.5.6/libexec/libexec/../completions/jenv.zsh'
+jenv rehash 2>/dev/null
+jenv refresh-plugins
+source "$HOME/.jenv/plugins/export/etc/jenv.d/init/export_jenv_hook.zsh"
+jenv() {
+  type typeset &> /dev/null && typeset command
+  command="$1"
+  if [ "$#" -gt 0 ]; then
+    shift
+  fi
+
+  case "$command" in
+  enable-plugin|rehash|shell|shell-options)
+    eval `jenv "sh-$command" "$@"`;;
+  *)
+    command jenv "$command" "$@";;
+  esac
+}
+# <<< jenv <<<
+
+# >>> fuzzy find >>>
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# <<< fuzzy find <<<
 
-# z/jump around https://github.com/rupa/z
+# >>> z/jump around >>>
+# https://github.com/rupa/z
 [ -f ~/.zsh/z.sh ] && . $HOME/.zsh/z.sh
+# <<< z/jump around <<<
 
-# kubenetes autocompletion
-source <(kubectl completion zsh)
+# >>> k8 >>>
+# source <(kubectl completion zsh)
+# <<< k8 <<<
 
-list_ec2() {
-    aws ec2 describe-instances \
-        --no-cli-pager \
-        --output table \
-        --filters Name=tag-key,Values=Name \
-        --query 'Reservations[*].Instances[*].{Instance:InstanceId,AZ:Placement.AvailabilityZone,Type:InstanceType,Name:Tags[?Key==`Name`]|[0].Value,State:State.Name,AMI:ImageId}'
-}
 
-eks17_ami_history() {
-    aws ssm get-parameter-history --name /AIS/AMI/AmazonEKS17Linux/Id \
-        | jq --arg IMAGE $1 '.Parameters[]| select (.Value==$IMAGE) | {date: .LastModifiedDate, ami: .Value}'
-}
-
-eks18_ami_history() {
-    aws ssm get-parameter-history --name /AIS/AMI/AmazonEKS18Linux/Id \
-        | jq --arg IMAGE $1 '.Parameters[]| select (.Value==$IMAGE) | {date: .LastModifiedDate, ami: .Value}'
-}
-
-eks19_ami_history() {
-    aws ssm get-parameter-history --name /AIS/AMI/AmazonEKS19Linux/Id \
-        | jq --arg IMAGE $1 '.Parameters[]| select (.Value==$IMAGE) | {date: .LastModifiedDate, ami: .Value}'
-}
-
-# Example `iam_role tableutils-rio-role`
-iam_role() {
-    aws iam list-roles \
-        | jq --arg ROLE $1 '.Roles[] | select(.RoleName == $ROLE)'
-}
-
-# import all alias
+# >>> import all alias >>>
 [ -f ~/.alias ] && source ~/.alias && echo 'loaded alias files'
+# <<< alias <<<
 
-# git autocompletion https://oliverspryn.medium.com/adding-git-completion-to-zsh-60f3b0e7ffbc
+
+# >>> git autocompletion >>>
+# https://oliverspryn.medium.com/adding-git-completion-to-zsh-60f3b0e7ffbc
 zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
 fpath=(~/.zsh $fpath)
+# <<< git autocompletion <<<
 
-# auto completion
+# >>> auto completion >>>
 autoload -U compinit && compinit -u
+# <<< auto completion <<<
 
-# zsh syntax highlighting
+# >>> zsh syntax highlighting >>>
 zsh_file_to_source="/opt/brew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 [ -f $zsh_file_to_source ] && source $zsh_file_to_source
+# <<< zsh syntax highlighting <<<
