@@ -24,9 +24,7 @@ alias kerberos="klist -s && kinit -R 2> /dev/null || (echo 'Kerberos ticket expi
 alias aws-local='aws --no-verify-ssl --endpoint-url http://127.0.0.1:8000 --region us-east-1'
 alias unset-aws='unset AWS_SECRET_ACCESS_KEY && unset AWS_ACCESS_KEY_ID && unset AWS_SESSION_TOKEN'
 
-# default to python3
-alias python='python3'
-
 #misc
 alias grep='nocorrect grep --color=auto --exclude-dir build'
 alias uuid="python -c 'import uuid; print(uuid.uuid4())'"
+alias sed="gsed"
