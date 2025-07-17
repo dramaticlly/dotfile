@@ -30,30 +30,16 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 # >>> jenv >>>
-export PATH=$HOME/.jenv/shims:$PATH
-export JENV_SHELL=zsh
-export JENV_LOADED=1
-unset JAVA_HOME
-unset JDK_HOME
-source '/opt/homebrew/Cellar/jenv/0.5.6/libexec/libexec/../completions/jenv.zsh'
-jenv rehash 2>/dev/null
-jenv refresh-plugins
-source "$HOME/.jenv/plugins/export/etc/jenv.d/init/export_jenv_hook.zsh"
-jenv() {
-  type typeset &> /dev/null && typeset command
-  command="$1"
-  if [ "$#" -gt 0 ]; then
-    shift
-  fi
-
-  case "$command" in
-  enable-plugin|rehash|shell|shell-options)
-    eval `jenv "sh-$command" "$@"`;;
-  *)
-    command jenv "$command" "$@";;
-  esac
-}
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+# auto set JAVA_HOME
+# jenv enable-plugin export
 # <<< jenv <<<
+
+# >>> pyenv >>>
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
 
 # >>> fuzzy find >>>
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -85,6 +71,7 @@ autoload -U compinit && compinit -u
 # <<< auto completion <<<
 
 # >>> zsh syntax highlighting >>>
-zsh_file_to_source="/opt/brew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# https://github.com/zsh-users/zsh-syntax-highlighting, must at the end
+zsh_file_to_source="$(brew --prefix zsh-syntax-highlighting)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 [ -f $zsh_file_to_source ] && source $zsh_file_to_source
 # <<< zsh syntax highlighting <<<
