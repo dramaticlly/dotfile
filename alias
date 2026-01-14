@@ -26,5 +26,6 @@ alias unset-aws='unset AWS_SECRET_ACCESS_KEY && unset AWS_ACCESS_KEY_ID && unset
 
 #misc
 alias grep='nocorrect grep --color=auto --exclude-dir build'
-alias uuid="python -c 'import uuid; print(uuid.uuid4())'"
+alias uuid="python3 -c 'import uuid; print(uuid.uuid4())'"
+alias utc="python3 -c 'from datetime import datetime, timezone; print(datetime.now(timezone.utc))'"
 alias sed="gsed"

@@ -1,8 +1,19 @@
 #debug-only
 #set -x
 
+# >>> zsh best practice: prevent duplicate PATH entries >>>
+# This must be set early, before any PATH modifications
+typeset -U path PATH
+typeset -U fpath FPATH
+# <<< zsh best practice <<<
+
 export EDITOR=vim
 export AWS_PAGER=
+
+# >>> custom bin directories >>>
+# Add custom bin directories (typeset -U ensures no duplicates)
+path=("$HOME/.local/bin" /usr/local/bin $path)
+# <<< custom bin directories <<<
 
 # >>> brew >>>
 [[ -d /opt/brew/share/zsh/site-functions/ ]] && fpath+=(/opt/brew/share/zsh/site-functions/)
@@ -40,6 +51,7 @@ eval "$(jenv init -)"
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
+# <<< pyenv <<<
 
 # >>> fuzzy find >>>
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
