@@ -8,6 +8,10 @@ lsrc -d `pwd`
 rcup -d `pwd`
 ```
 
+## Scripts
+Helper scripts live under `scripts/` and are symlinked to `~/.scripts/` by `rcup`.
+Referenced from `alias` (e.g. `epoch2ts` for epoch <-> timestamp conversion).
+
 ## Troubleshooting
 ### Vim
 In order to fix vim issue, install Vbundle.vim

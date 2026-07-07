@@ -9,7 +9,7 @@ alias treeExclude="tree -I 'node_modules|build|wrapper'"
 # date/timestamp
 alias dateutc="date -u"
 alias epoch="date +%s"
-epoch2ts() { python3 "$HOME/workspace/scripts/epoch2ts.py" "$@"; }
+epoch2ts() { python3 "$HOME/.scripts/epoch2ts.py" "$@"; }
 
 # git
 alias gi="git"
