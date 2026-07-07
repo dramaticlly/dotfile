@@ -6,7 +6,6 @@
 [core]
     pager = less -FMRiX
     excludesfile = $HOME/.gitignore_global
-	sshCommand = /usr/local/bin/sf __ssh
 [push]
     default = simple
 [alias]
@@ -39,4 +38,4 @@
 [url "ssh://git@github.com-oss/polaris-catalog"]
     insteadOf = https://github.com/polaris-catalog
 [init]
-	templateDir = /Users/hozhang/.git-template
+	templateDir = ~/.git-template

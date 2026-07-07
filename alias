@@ -31,7 +31,6 @@ alias uuid="python3 -c 'import uuid; print(uuid.uuid4())'"
 alias utc="python3 -c 'from datetime import datetime, timezone; print(datetime.now(timezone.utc))'"
 alias sed="gsed"
 
-#sf ws
-export WORKSPACE="hozhang-0521"
-alias snowsql="/Applications/SnowSQL.app/Contents/MacOS/snowsql"
-#export VAULT_ADDR="https://dev-metavault.int.snowflakecomputing.com:8200"
+# remote tmux via ssh: attach-or-create a session on <host> in tmux control mode.
+# usage: sshtm <host> [session]   (session defaults to "main")
+sshtm() { ssh -t "$1" "tmux -CC new-session -A -s '${2:-main}'; exit"; }
