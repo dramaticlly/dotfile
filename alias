@@ -9,6 +9,7 @@ alias treeExclude="tree -I 'node_modules|build|wrapper'"
 # date/timestamp
 alias dateutc="date -u"
 alias epoch="date +%s"
+epoch2ts() { python3 "$HOME/workspace/scripts/epoch2ts.py" "$@"; }
 
 # git
 alias gi="git"
@@ -29,3 +30,8 @@ alias grep='nocorrect grep --color=auto --exclude-dir build'
 alias uuid="python3 -c 'import uuid; print(uuid.uuid4())'"
 alias utc="python3 -c 'from datetime import datetime, timezone; print(datetime.now(timezone.utc))'"
 alias sed="gsed"
+
+#sf ws
+export WORKSPACE="hozhang-0521"
+alias snowsql="/Applications/SnowSQL.app/Contents/MacOS/snowsql"
+#export VAULT_ADDR="https://dev-metavault.int.snowflakecomputing.com:8200"

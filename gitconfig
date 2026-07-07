@@ -1,18 +1,14 @@
 [user]
-    email = steveiszhy@gmail.com
-    name = Steve Zhang
+    email = hongyue.zhang@snowflake.com
+    name = Hongyue Zhang
 [color]
     ui = auto
 [core]
     pager = less -FMRiX
     excludesfile = $HOME/.gitignore_global
+	sshCommand = /usr/local/bin/sf __ssh
 [push]
     default = simple
-[amazon]
-    append-cr-url = true
-    pull-request-by-default = true
-[credential]
-    helper = !aws codecommit credential-helper $@
 [alias]
     fuller = log --notes --format=fuller --name-status
     dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%ar%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
@@ -39,6 +35,8 @@
 [url "github-oss.com:apache/"]
     insteadOf = git@github.com:apache/
 [url "ssh://git@github.com/"]
-    insteadOf = https://github.com/
+	insteadOf = https://github.com/
 [url "ssh://git@github.com-oss/polaris-catalog"]
     insteadOf = https://github.com/polaris-catalog
+[init]
+	templateDir = /Users/hozhang/.git-template

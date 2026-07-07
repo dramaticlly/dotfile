@@ -13,6 +13,8 @@ export AWS_PAGER=
 # >>> custom bin directories >>>
 # Add custom bin directories (typeset -U ensures no duplicates)
 path=("$HOME/.local/bin" /usr/local/bin $path)
+# Docker Desktop (add if installed)
+[[ -d /Applications/Docker.app/Contents/Resources/bin ]] && path+=(/Applications/Docker.app/Contents/Resources/bin)
 # <<< custom bin directories <<<
 
 # >>> brew >>>
@@ -71,6 +73,10 @@ eval "$(pyenv init - zsh)"
 [ -f ~/.alias ] && source ~/.alias && echo 'loaded alias files'
 # <<< alias <<<
 
+# >>> aws credential file >>>
+export AWS_REGION=us-west-2
+[ -f ~/.awscredentials ] && source ~/.awscredentials
+# <<< aws credential file <<<
 
 # >>> git autocompletion >>>
 # https://oliverspryn.medium.com/adding-git-completion-to-zsh-60f3b0e7ffbc
