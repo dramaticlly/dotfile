@@ -1,5 +1,5 @@
 [user]
-    email = hongyue.zhang@snowflake.com
+    email = hongyue_zhang@apple.com
     name = Hongyue Zhang
 [color]
     ui = auto
@@ -15,7 +15,7 @@
     diffc = diff --cached
     last = log -1 HEAD
     trail2 = log -2 HEAD
-    logme = log --author=\"Steve Zhang\" --since=\"2 weeks ago\"
+    logme = log -i -E --author=\"(steve|hongyue) zhang\" --since=\"2 weeks ago\"
     addu = add -u
     dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%ar%C(reset)%C(auto)%d%C(reset)%n%s' --date-order --all
     l = log --graph --abbrev-commit --decorate --date=relative --format=format:'''%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'''
@@ -34,8 +34,11 @@
 [url "github-oss.com:apache/"]
     insteadOf = git@github.com:apache/
 [url "ssh://git@github.com/"]
-	insteadOf = https://github.com/
-[url "ssh://git@github.com-oss/polaris-catalog"]
-    insteadOf = https://github.com/polaris-catalog
+    insteadOf = https://github.com/
 [init]
-	templateDir = ~/.git-template
+    templateDir = ~/.git-template
+
+# Machine-specific overrides (commit signing, 1Password SSH, etc.).
+# Untracked; see ~/.gitconfig.local. Absent on sandboxes without 1Password.
+[include]
+    path = ~/.gitconfig.local

@@ -61,6 +61,8 @@ fi
 
 
 ### tmux
+The prefix is `C-Space` (Ctrl+Space), not the default `C-b`.
 1. install [tmux]() `brew install tmux`
 2. install [tpm](https://github.com/tmux-plugins/tpm) `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
-3. install tmux plugins (include tpm): within tmux session to controlA + capital I to reload
+3. reload the config into the running session: `tmux source-file ~/.tmux.conf`
+4. install tmux plugins (include tpm): within a tmux session press prefix + `I` (capital i), i.e. `C-Space` then `Shift+i`
